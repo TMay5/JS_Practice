@@ -194,6 +194,8 @@ function drawScore(){
 }
 
 function drawGameOver(){
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    collisionCtx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.textAlign = 'center';
     ctx.fillStyle = 'lightblue';
     ctx.fillText('GAME OVER! YOUR SCORE IS: ' + score, canvas.width/2, canvas.height/2);
@@ -220,9 +222,8 @@ window.addEventListener('click', function(e){
     saws.forEach(object => {
         if (object.randomColors[0] === pc[0] && object.randomColors[1] === pc[1] && object.randomColors[2] === pc[2]){
             //collision detected
-            object.markedForDeletion = true;
             gameOver = true;
-            explosions.push(new Explosions(object.x, object.y, object.width));
+            explosions.push(new Explosions(object.x, object.y, object.width * Math.floor(Math.random() * 3 + 2)));
         }
     })    
 });
