@@ -221,9 +221,7 @@ window.addEventListener('click', function(e){
     const pc = detectPixelColor.data;
     saws.forEach(object => {
         if (object.randomColors[0] === pc[0] && object.randomColors[1] === pc[1] && object.randomColors[2] === pc[2]){
-            //collision detected
             gameOver = true;
-            explosions.push(new Explosions(object.x, object.y, object.width * Math.floor(Math.random() * 3 + 2)));
         }
     })    
 });
