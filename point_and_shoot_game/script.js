@@ -113,8 +113,7 @@ class flyingSaw {
                 particles.push(new Particle(this.x, this.y, this.width, this.color));
                 }
             }
-        }
-        if (this.x < 0 - this.width) gameOver = true;    
+        }  
     }
     draw(){
         collisionCtx.fillStyle = this.color;
@@ -205,11 +204,24 @@ function drawGameOver(){
 window.addEventListener('click', function(e){
     const detectPixelColor = collisionCtx.getImageData(e.x, e.y, 1, 1);
     const pc = detectPixelColor.data;
-    [...ravens, ...saws].forEach(object => {
+    ravens.forEach(object => {
         if (object.randomColors[0] === pc[0] && object.randomColors[1] === pc[1] && object.randomColors[2] === pc[2]){
             //collision detected
             object.markedForDeletion = true;
             score++;
+            explosions.push(new Explosions(object.x, object.y, object.width));
+        }
+    })    
+});
+
+window.addEventListener('click', function(e){
+    const detectPixelColor = collisionCtx.getImageData(e.x, e.y, 1, 1);
+    const pc = detectPixelColor.data;
+    saws.forEach(object => {
+        if (object.randomColors[0] === pc[0] && object.randomColors[1] === pc[1] && object.randomColors[2] === pc[2]){
+            //collision detected
+            object.markedForDeletion = true;
+            gameOver = true;
             explosions.push(new Explosions(object.x, object.y, object.width));
         }
     })    
